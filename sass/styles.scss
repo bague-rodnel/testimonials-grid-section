@@ -1,3 +1,12 @@
+@use "sass:math";
+
+@function fluid($min, $max, $minvw: 375px, $maxvw: 1440px) {
+  @return calc(
+    #{$min} + (#{math.div($max - $min, 1px)}) * ((100vw - #{$minvw}) /
+          (#{math.div($maxvw - $minvw, 1px)}))
+  );
+}
+
 $color-violet: hsl(263, 55%, 52%);
 $color-blue-grayish: hsl(217, 19%, 35%);
 $color-blue-blackish: hsl(219, 29%, 14%);
@@ -65,67 +74,67 @@ body {
       font-weight: 500;
       line-height: 1.4;
     }
+  }
 
-    &.main-rect,
-    &.dark-rect,
-    &.dark-square {
-      .name {
-        color: $color-white;
-      }
-
-      .status {
-        color: rgba($color-white, 0.5);
-      }
-
-      .brief {
-        color: $color-white;
-      }
-
-      .detailed {
-        color: rgba($color-white, 0.7);
-      }
+  .main-rect,
+  .dark-rect,
+  .dark-square {
+    .name {
+      color: $color-white;
     }
 
-    &.light-rect,
-    &.light-square {
-      background-color: $color-white;
-
-      .name {
-        color: $color-blue-grayish;
-      }
-
-      .status {
-        color: rgba($color-blue-grayish, 0.5);
-      }
-
-      .brief {
-        color: $color-blue-grayish;
-      }
-
-      .detailed {
-        color: rgba($color-blue-grayish, 0.7);
-      }
+    .status {
+      color: rgba($color-white, 0.5);
     }
 
-    &.main-rect {
-      background-color: $color-violet;
-      background-image: url(../images/bg-pattern-quotation.svg);
-      background-size: 104px 102px;
-      background-repeat: no-repeat;
-      background-position: right 24px top 0;
-
-      .detailed {
-        margin-right: 14px;
-      }
+    .brief {
+      color: $color-white;
     }
 
-    &.dark-square {
-      background-color: $color-blue-grayish;
+    .detailed {
+      color: rgba($color-white, 0.7);
+    }
+  }
+
+  .light-rect,
+  .light-square {
+    background-color: $color-white;
+
+    .name {
+      color: $color-blue-grayish;
     }
 
-    &.dark-rect {
-      background-color: $color-blue-blackish;
+    .status {
+      color: rgba($color-blue-grayish, 0.5);
     }
+
+    .brief {
+      color: $color-blue-grayish;
+    }
+
+    .detailed {
+      color: rgba($color-blue-grayish, 0.7);
+    }
+  }
+
+  .main-rect {
+    background-color: $color-violet;
+    background-image: url(../images/bg-pattern-quotation.svg);
+    background-size: 104px 102px;
+    background-repeat: no-repeat;
+    background-position: right fluid(24px, 80px) top 0;
+
+    .detailed {
+      margin-right: 14px;
+    }
+  }
+
+  .dark-square {
+    background-color: $color-blue-grayish;
+  }
+
+  .dark-rect {
+    background-color: $color-blue-blackish;
   }
 }
 
@@ -143,7 +152,7 @@ body {
       display: grid;
       gap: 25px;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, 1fr);
+      grid-template-rows: repeat(3, fit-content);
       grid-template-areas:
         "main-rect main-rect light-rect"
         "light-square dark-square light-rect"
@@ -193,7 +202,7 @@ body {
       display: grid;
       gap: 30px;
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, 1fr);
+      grid-template-rows: repeat(2, fit-content);
       grid-template-areas:
         "main-rect main-rect dark-square light-rect"
         "light-square dark-rect dark-rect light-rect";
