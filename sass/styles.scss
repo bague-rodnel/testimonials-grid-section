@@ -152,7 +152,7 @@ body {
       display: grid;
       gap: 25px;
       grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(3, fit-content);
+      grid-template-rows: fit-content(100%);
       grid-template-areas:
         "main-rect main-rect light-rect"
         "light-square dark-square light-rect"
@@ -184,7 +184,6 @@ body {
 
       .dark-rect {
         grid-area: dark-rect;
-        height: fit-content;
 
         .detailed {
           margin-right: 14px;
@@ -202,7 +201,6 @@ body {
       display: grid;
       gap: 30px;
       grid-template-columns: repeat(4, 1fr);
-      grid-template-rows: repeat(2, fit-content);
       grid-template-areas:
         "main-rect main-rect dark-square light-rect"
         "light-square dark-rect dark-rect light-rect";
